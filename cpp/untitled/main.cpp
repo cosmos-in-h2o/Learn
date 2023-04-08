@@ -1,4 +1,5 @@
 #include <iostream>
+
 import test;
 auto main() -> int {
     int a=0;

@@ -1,1 +1,6 @@
-{ }
+{
+    eigen = {
+        __requirestr = "eigen 3.40",
+        __enabled = false
+    }
+}

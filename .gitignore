@@ -1,4 +1,3 @@
 #忽略cmake的构建文件
-./cpp/cmake/build/
-./cpp/untitled/build/
-./cpp/untitled/cmake-build-debug/
+./cpp/*/build/
+./cpp/*/cmake-build-debug/
