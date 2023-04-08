@@ -1,0 +1,29 @@
+{
+    modules = {
+        ["test/c++.build.modules.builder"] = {
+            ["build/.objs/test/linux/x86_64/release/main.cpp.o"] = {
+                cppfile = "main.cpp",
+                requires = {
+                    test = {
+                        path = "build/.gens/test/linux/x86_64/release/rules/modules/cache/574a3743/test.gcm",
+                        unique = false,
+                        method = "by-name"
+                    }
+                }
+            },
+            ["build/.objs/test/linux/x86_64/release/test.ixx.o"] = {
+                provides = {
+                    test = {
+                        sourcefile = "test.ixx",
+                        bmi = "build/.gens/test/linux/x86_64/release/rules/modules/cache/574a3743/test.gcm",
+                        interface = true
+                    }
+                }
+            }
+        }
+    },
+    modules_paths = {
+        ["main.cpp"] = "build/.gens/test/linux/x86_64/release/rules/modules/cache/574a3743",
+        ["test.ixx"] = "build/.gens/test/linux/x86_64/release/rules/modules/cache/574a3743"
+    }
+}

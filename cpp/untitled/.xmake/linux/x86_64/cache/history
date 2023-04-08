@@ -1,0 +1,15 @@
+{
+    cmdlines = {
+        "xmake lua /usr/share/xmake/actions/build/statistics.lua",
+        "xmake f -y -p linux -a x86_64 -m release",
+        "xmake run",
+        "xmake run",
+        "xmake run",
+        "xmake -w",
+        "xmake run",
+        "xmake c",
+        "xmake run",
+        "xmake -w",
+        "xmake run"
+    }
+}

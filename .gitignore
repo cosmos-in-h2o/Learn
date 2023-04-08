@@ -1,0 +1,2 @@
+#忽略cmake的构建文件
+./cpp/*/build/
