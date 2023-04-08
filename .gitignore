@@ -1,6 +1,5 @@
-#忽略cmake的构建文件
-./cpp/*/build/
-./cpp/*/cmake-build-debug/
-./cpp/*/.xmake/
-./cpp/*/.idea/
-./cpp/*/.vscode/
+#忽略构建文件及其他缓存文件
+**/build/
+**/cmake-build-debug/
+**/.xmake/
+**/.idea/

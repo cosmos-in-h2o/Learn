@@ -1,3 +1,0 @@
-/home/dream/Learn/cpp/cmake/build/CMakeFiles/cmake.dir
-/home/dream/Learn/cpp/cmake/build/CMakeFiles/edit_cache.dir
-/home/dream/Learn/cpp/cmake/build/CMakeFiles/rebuild_cache.dir
