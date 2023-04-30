@@ -1,0 +1,11 @@
+[
+{
+  "directory": "/home/dream/Learn/cpp/cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-g", "-O0", "-o", "build/.objs/virtual_func/linux/x86_64/debug/virtual_func/main.cpp.o", "virtual_func/main.cpp"],
+  "file": "virtual_func/main.cpp"
+},
+{
+  "directory": "/home/dream/Learn/cpp/cpp",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-g", "-O0", "-o", "build/.objs/vdestructor/linux/x86_64/debug/vdestructor/main.cpp.o", "vdestructor/main.cpp"],
+  "file": "vdestructor/main.cpp"
+}]

@@ -1,6 +1,0 @@
-add_rules("mode.debug", "mode.release")
-add_requires("eigen 3.40")
-target("test")
-    set_kind("binary")
-    add_files("*.cpp")
-    add_files("*.ixx")
