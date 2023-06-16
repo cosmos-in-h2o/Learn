@@ -21,7 +21,7 @@ public:
 class D:public C{
 public:
     D(){cout<<"D的构造函数调用"<<endl;}
-    ~D(){cout<<"D的析构函数调用"<<endl;}
+    ~D() override{cout<<"D的析构函数调用"<<endl;}
 };
 int main(){
     A*a=new A;
