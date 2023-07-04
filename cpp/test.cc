@@ -1,21 +1,39 @@
 #include <algorithm>
-#include <string>
-#include <memory.h>
-#include <malloc.h>
 #include <iostream>
-#include <type_traits>
-#include <utility>
-void func(int& i){
-    std::cout<<i<<"\tlval\n";
+#include <thread>
+#include <mutex>
+#include <queue>
+#include <condition_variable>
+using namespace std;
+mutex mtx;
+condition_variable cv;
+queue<int> q;
+
+void producer(){
+    int i=0;
+    while(true){
+        unique_lock<mutex> lock(mtx);
+        q.push(i);
+        cv.notify_one();
+        i++;
+    }
 }
-void func(int&& i){
-    std::cout<<i<<"\trval\n";
+void customer(){
+   
+    while(true){
+        unique_lock<mutex> lock(mtx);
+        if(q.empty()){
+            cv.wait(lock);
+        }
+        cout<<q.front()<<'\n';
+        q.pop();
+    }
 }
-template<typename T> void test(T&& i){
-    func(std::forward(i));
-}
-int main(){
-    int a=1;
-    test(a);
-    test(std::forward(1));
+int main()
+{
+    thread t1(producer);
+    thread t2(customer);
+    t1.join();
+    t2.join();
+    return 0;
 }
