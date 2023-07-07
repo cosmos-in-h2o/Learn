@@ -1,38 +1,19 @@
 #include <iostream>
-#include <thread>
-#include <mutex>
-#include <queue>
-#include <condition_variable>
-using namespace std;
-mutex mtx;
-condition_variable cv;
-queue<int> q;
+#include <future>
+#include <functional>
 
-[[noreturn]] void producer(){
-    int i=0;
-    while(true){
-        unique_lock<mutex> lock(mtx);
-        q.push(i);
-        cv.notify_one();
-        i++;
-    }
-}
+int main() {
+    // 创建一个 packaged_task，将其与一个简单的 lambda 表达式关联
+    std::packaged_task<int()> task([](){
+        std::cout << "Task executed!" << std::endl;
+        return 42;
+    });
 
-[[noreturn]] void customer(){
-    while(true){
-        unique_lock<mutex> lock(mtx);
-        if(q.empty()){
-            cv.wait(lock);
-        }
-        cout<<q.front()<<'\n';
-        q.pop();
-    }
-}
-int main()
-{
-    thread t1(producer);
-    thread t2(customer);
-    t1.join();
-    t2.join();
+    // 获取与 packaged_task 关联的 future
+    //std::future<int> future = task.get_future();
+    // 执行任务
+    //task();
+    //std::cout << "Task result: " << future.get() << std::endl;
+    std::cout << std::boolalpha << task.valid() << std::endl;
     return 0;
 }
