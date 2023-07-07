@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -9,7 +8,7 @@ mutex mtx;
 condition_variable cv;
 queue<int> q;
 
-void producer(){
+[[noreturn]] void producer(){
     int i=0;
     while(true){
         unique_lock<mutex> lock(mtx);
@@ -18,8 +17,8 @@ void producer(){
         i++;
     }
 }
-void customer(){
-   
+
+[[noreturn]] void customer(){
     while(true){
         unique_lock<mutex> lock(mtx);
         if(q.empty()){
