@@ -4,25 +4,9 @@
 
 # project
 cmake_minimum_required(VERSION 3.15.0)
-cmake_policy(SET CMP0091 NEW)
-project(test LANGUAGES CXX C)
-
-# target
-add_executable(test "" chan.h)
-set_target_properties(test PROPERTIES OUTPUT_NAME "test")
-set_target_properties(test PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/target")
-if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
-    target_compile_options(test PRIVATE /EHsc)
-else()
-    target_compile_options(test PRIVATE -fcxx-exceptions)
-endif()
-set_target_properties(test PROPERTIES CXX_EXTENSIONS OFF)
-target_compile_features(test PRIVATE cxx_std_20)
-if(MSVC)
-    set_property(TARGET test PROPERTY
-        MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-endif()
-target_sources(test PRIVATE
-    test.cc
-)
-
+project(test)
+set(CMAKE_CXX_STANDARD 23)
+add_executable(${PROJECT_NAME})
+target_sources(${PROJECT_NAME} PRIVATE
+				test.cc
+		)

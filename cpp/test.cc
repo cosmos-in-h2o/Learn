@@ -1,11 +1,40 @@
 #include <atomic>
-#include <iostream>
 #include <thread>
-struct Test{
-    int a;
-    Test& operator+=(const Test&t){}
-};
+#include <cassert>
+#include <iostream>
+
+std::atomic<bool> x = false;
+std::atomic<bool> y = false;
+std::atomic<int> z = 0;
+
+void write_x() {
+    x.store(true, std::memory_order_relaxed);
+}
+
+void write_y() {
+    y.store(true, std::memory_order_relaxed);
+}
+
+void read_x_then_y() {
+    while (!x.load(std::memory_order_relaxed));
+    if (y.load(std::memory_order_relaxed)) ++z;
+}
+
+void read_y_then_x() {
+    while (!y.load(std::memory_order_relaxed));
+    if (x.load(std::memory_order_relaxed)) ++z;
+}
 
 int main() {
-    return 0;
+    std::thread a(write_x);
+    std::thread b(write_y);
+    std::thread c(read_x_then_y);
+    std::thread d(read_y_then_x);
+    a.join();
+    b.join();
+    c.join();
+    d.join();
+    if(z.load() == 0){
+        std::cout<<"failed";
+    }
 }
