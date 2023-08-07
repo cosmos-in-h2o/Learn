@@ -1,40 +1,18 @@
-#include <atomic>
-#include <thread>
-#include <cassert>
+#include "entt.hpp"
 #include <iostream>
+struct com{
+    int a,b;
+};
 
-std::atomic<bool> x = false;
-std::atomic<bool> y = false;
-std::atomic<int> z = 0;
+int main(){
+    entt::registry registry;
+    entt::entity entity=registry.create(); 
+    entt::entity entity2=registry.create();
+    registry.emplace<com>(entity);
+    registry.emplace<com>(entity2);
+	// 如果实体仍然有效，则返回 true，否则返回 false
+	bool b = registry.valid(entity);
 
-void write_x() {
-    x.store(true, std::memory_order_relaxed);
-}
-
-void write_y() {
-    y.store(true, std::memory_order_relaxed);
-}
-
-void read_x_then_y() {
-    while (!x.load(std::memory_order_relaxed));
-    if (y.load(std::memory_order_relaxed)) ++z;
-}
-
-void read_y_then_x() {
-    while (!y.load(std::memory_order_relaxed));
-    if (x.load(std::memory_order_relaxed)) ++z;
-}
-
-int main() {
-    std::thread a(write_x);
-    std::thread b(write_y);
-    std::thread c(read_x_then_y);
-    std::thread d(read_y_then_x);
-    a.join();
-    b.join();
-    c.join();
-    d.join();
-    if(z.load() == 0){
-        std::cout<<"failed";
-    }
+// 获取给定实体的实际版本
+	auto curr = registry.current(entity);
 }
